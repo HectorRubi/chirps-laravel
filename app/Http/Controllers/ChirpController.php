@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chirp;
+use App\Models\User;
+use App\Notifications\NewChirp;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Notification;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -40,7 +43,12 @@ class ChirpController extends Controller
             'message' => 'required|string|max:255',
         ]);
 
-        $request->user()->chirps()->create($validated);
+        $chirp = $request->user()->chirps()->create($validated);
+
+        // TODO: This should be changed to use an event instead
+        foreach (User::whereNot('id', $chirp->user_id)->cursor() as $user) {
+            Notification::send($user, new NewChirp($chirp));
+        }
 
         return redirect(route('chirps.index'));
     }
