@@ -10,7 +10,23 @@ services:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=chirps
     volumes:
-      - chirps:/var/lib/mysql
+      - chirps-db:/var/lib/mysql
+
+  mailpit:
+    image: axllent/mailpit
+    container_name: mailpit
+    restart: always
+    volumes:
+      - chirps-mail:/data
+    ports:
+      - 8025:8025
+      - 1025:1025
+    environment:
+      MP_MAX_MESSAGES: 5000
+      MP_DATA_FILE: /data/mailpit.db
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
 
 volumes:
-  chirps:
+  chirps-db:
+  chirps-mail:
