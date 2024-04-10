@@ -18,7 +18,9 @@ This project was build with Laravel 11, so I encourage you to review It's [Serve
 ## Installation
 1. Clone this repository.
 
-1. Copy the ```.env.example``` file and create a new ```.env``` file, find the database section and set this configuration:
+1. Copy the ```.env.example``` file and create a new ```.env``` file.
+
+1. Change database configuration, set this values:
     ```properties
     DB_CONNECTION=mysql
     DB_HOST=127.0.0.1
@@ -28,7 +30,14 @@ This project was build with Laravel 11, so I encourage you to review It's [Serve
     DB_PASSWORD=password
     ```
 
-1. Set up the database using docker compose:
+1. Change mail configuration, set this values:
+    ```properties
+    MAIL_MAILER=smtp
+    MAIL_HOST=localhost
+    MAIL_PORT=1025
+    ```
+
+1. Set up the services using docker compose:
 
     ```bash
     docker compose up -d
@@ -51,7 +60,9 @@ This project was build with Laravel 11, so I encourage you to review It's [Serve
     php artisan migrate
     ```
 
-1. Open your browser in ```localhost:8000```
+1. Open your browser in:
+    - ```localhost:8000``` to use the app, and
+    - ```localhost:8025``` to view the emails sended.
 
 ## Contributing
 
