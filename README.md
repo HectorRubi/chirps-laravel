@@ -23,7 +23,7 @@ This project was build with Laravel 11, so I encourage you to review It's [Serve
 1. Change database configuration, set this values:
     ```properties
     DB_CONNECTION=mysql
-    DB_HOST=127.0.0.1
+    DB_HOST=database
     DB_PORT=3306
     DB_DATABASE=chirps
     DB_USERNAME=root
